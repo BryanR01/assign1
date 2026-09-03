@@ -94,14 +94,21 @@ public class OrderDB implements OrderDBInterface{
 
 	@Override
 	public Order get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return orders[index-1];
 	}
 
 	@Override
 	public int searchByOrderID(int orderID) {
-		// TODO Auto-generated method stub
-		return 0;
+		int index=0;
+		try {
+		for(int i=0; i<size; i++)
+			if(orders[i].id==orderID) {
+				index= i;
+			}
+		}catch(NullPointerException e) {
+			System.out.println("That order ID does not exist");
+		}
+		return index;
 	}
 
 	@Override

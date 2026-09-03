@@ -86,8 +86,32 @@ public class Driver {
 				data.add(position, newOrder);
 				
 			}
-			else if(choice==4) {
+			else if(choice==4) {//4
 				data.clear();
+			}
+			else if(choice==5) {//5
+				int position;
+				System.out.printf("Enter position in list for order: \n");
+				position=key.nextInt();
+				
+				Order getOrd=data.get(position);
+				
+				System.out.printf("%-9s %-35s %-9s", "Order ID", "Product","Total Amt\n");
+				System.out.printf("%-9s %-35s %-9s", "--------", "--------", "---------\n");
+				System.out.printf("%-9s %-35s %-9s\n\n", getOrd.id, getOrd.product, getOrd.amt);
+			}
+			else if(choice==6) {
+				int id;
+				System.out.println("Enter order ID: ");
+				id=key.nextInt();
+				
+				Order getOrd=data.orders[data.searchByOrderID(id)];
+				
+				System.out.printf("%-9s %-35s %-9s", "Order ID", "Product","Total Amt\n");
+				System.out.printf("%-9s %-35s %-9s", "--------", "--------", "---------\n");
+				System.out.printf("%-9s %-35s %-9s\n\n", getOrd.id, getOrd.product, getOrd.amt);
+				
+				
 			}
 			
 			
