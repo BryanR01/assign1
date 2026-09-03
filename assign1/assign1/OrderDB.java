@@ -3,9 +3,11 @@ package assign1;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class OrderDB implements OrderDBInterface{
-	Order[] orders=new Order[25];
+	int size=25;
+	Order[] orders=new Order[size];
 	int OrderAmt;
 	int place=0;
 	int rand=0;
@@ -27,7 +29,7 @@ public class OrderDB implements OrderDBInterface{
 				Order order= new Order(id, OrderInfo[1], OrderInfo[2], amt, OrderInfo[4]);
 				OrderAmt++;
 				
-				if(rand>=25) {
+				if(rand<size) {
 				orders[place]=order;
 				place++;
 				}
@@ -54,28 +56,39 @@ public class OrderDB implements OrderDBInterface{
 
 	@Override
 	public void showOrders() {
-		System.out.println("Order ID  Product\t\t\t\tTotal Amt\n--------  -------\t\t\t\t---------");
+		try {
+		System.out.printf("%-9s %-35s %-9s", "Order ID", "Product","Total Amt\n");
+		System.out.printf("%-9s %-35s %-9s", "--------", "--------", "---------\n");
 		for(int i=0; i<orders.length; i++) {
-			System.out.printf(orders[i].id +"\t  "+ orders[i].product +"\t\t\t\t"+ orders[i].amt+"\n");
+			System.out.printf("%-9s %-35s %9.2f\n",orders[i].id , orders[i].product , orders[i].amt);
+		}
+		}catch(NullPointerException e) {
+			System.out.printf("List is emplty\n\n");
 		}
 		
-	}
+	}//Show
 
 	@Override
 	public boolean add(Order order) {
-		// TODO Auto-generated method stub
-		return false;
+		if(orders[orders.length-1]==null) {
+			orders[orders.length-1]=order;
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	@Override
 	public void add(int index, Order order) {
-		// TODO Auto-generated method stub
+		orders[index-1]=order;
 		
 	}
 
 	@Override
 	public void clear() {
-		// TODO Auto-generated method stub
+		for(int i=0; i<size; i++) {
+			orders[i]=null;
+		}
 		
 	}
 
@@ -117,8 +130,12 @@ public class OrderDB implements OrderDBInterface{
 
 	@Override
 	public void resize() {
-		// TODO Auto-generated method stub
-		
+		Order[] ordersTemp=orders;
+		Order[] orders= new Order[size+25];
+		for(int i=0; i>size; i++) {
+			orders[i]=ordersTemp[i];
+		}
+		size+=25;
 	}
 	
 	
