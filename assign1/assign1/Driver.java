@@ -14,7 +14,8 @@ public class Driver {
 			System.out.printf("What would you like to do?: \n1.Show Orders \n2.Add Order at end"
 					+ "\n3.Add order at spot\n4.Clear \n5.Get order from spot \n6.Search by order ID "
 					+ "\n7.Load orders \n8.Remove order at spot \n9.Roplace order at spot "
-					+ "\n10.See amount of orders in list \n11.see total space on list \n12.Resize list +25\n" );
+					+ "\n10.See amount of orders in list \n11.see total space on list \n12.Resize list +25"
+					+ "\n0. Quit\n" );
 			choice=key.nextInt();
 			
 			if(choice==1) {//1
