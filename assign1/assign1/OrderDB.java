@@ -1,7 +1,10 @@
 package assign1;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -54,9 +57,27 @@ public class OrderDB implements OrderDBInterface{
 
 	@Override
 	public int saveOrders(String fileName) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		int writen=0;
+		
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+			for(int i=0; i<orders.length; i++) {
+				if(orders[i]!=null) {
+					Order currOrd=orders[i];
+					
+					String line=String.format("%d, %s, %s, %.2f, %s", currOrd.id, currOrd.customer, currOrd.product, currOrd.amt, currOrd.date);
+					
+					writer.write(line);
+					writer.newLine();
+					writen++;
+				}
+			}//For
+		
+		}catch(IOException e) {
+			System.out.println("Error saving file ");
+		}
+		return writen;
+	}//Save Orders
 
 	@Override
 	public void showOrders() {
@@ -87,7 +108,7 @@ public class OrderDB implements OrderDBInterface{
 
 	@Override
 	public void add(int index, Order order) {
-		if(orders[index]==null) {
+		if(orders[index-1]==null) {
 			orders[index-1]=order;
 		}else {
 			System.out.println("That spot has an order in it. Try option 9 to replace it.");
@@ -162,10 +183,10 @@ public class OrderDB implements OrderDBInterface{
 	public void resize() {
 		Order[] ordersTemp=orders;
 		Order[] newOrders= new Order[size+25];
-		this.orders=newOrders;
-		for(int i=0; i>orders.length; i++) {
-			orders[i]=ordersTemp[i];
+		for(int i=0; i<orders.length; i++) {
+			newOrders[i]=ordersTemp[i];
 		}
+		this.orders=newOrders;
 		size+=25;
 	}
 	

@@ -18,5 +18,11 @@ public class Order {
 		this.amt=amt;
 		this.date=date;
 	}
+	
+	public int getID() {return this.id;}
+	public String getCustomer() {return this.customer;}
+	public String getProduct() {return this.product;}
+	public double getAmt() {return this.amt;}
+	public String getDate() {return this.date;}
 
 }
